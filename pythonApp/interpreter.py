@@ -1,4 +1,5 @@
 import sys
+
 def interpret(code):
     
     memory_array = [0] * 10
@@ -41,7 +42,7 @@ def interpret(code):
         else:
             pass
         i += 1
-        # print(*memory_array[:pointer_location], str(memory_array[pointer_location]) + '*', *memory_array[pointer_location+1:], sep="|")
+        print(*memory_array[:pointer_location], str(memory_array[pointer_location]) + '*', *memory_array[pointer_location+1:], sep="|")
     print()
 
 
