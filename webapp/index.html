@@ -5,7 +5,37 @@
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
-        
+        <div class="heading">BrainFuck Interpreter</div>
+        <div class="flex">
+            <div class="info">
+                <div>
+                    Brainfuck is a Turing complete language designed to be extremely minimalistic. It consists of only eight simple commands, a data pointer, and an instruction pointer. It is meant for amusement rather than practical function.
+                </div>
 
+                <div class="legend">
+                    <Table>
+                        <thead>
+                                <th>Command</th>
+                                <th>Description</th>
+                        </thead>
+                        <tbody>
+                            <tr><td>&gt;</td><td>Move memory pointer to 1 unit right</td></tr>
+                            <tr><td>&lt;</td><td>Move memory pointer to 1 unit left</td></tr>
+                            <tr><td>&plus;</td><td>Increase memory at current location by 1</td></tr>
+                            <tr><td>&minus;</td><td>Decrease memory at current location by 1</td></tr>
+                            <tr><td>&period;</td><td>Output the value at current location</td></tr>
+                            <tr><td>&comma;</td><td>Input a value and store at current location</td></tr>
+                            <tr><td>&lsqb;</td><td> Like a while loop which runs while the memory at current location is not 0</td></tr>
+                            <tr><td>&rsqb;</td><td> Closing of the loop. Loop back when value at current location is not 0</td></tr>
+                        </tbody>
+                    </Table>
+                </div>
+            </div>
+
+            <div class="operational">
+
+            </div>
+
+        </div>
     </body>
 </html> 

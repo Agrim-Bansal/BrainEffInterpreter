@@ -1,1 +1,2 @@
 So I'll be using Blessed module for the terminal interface. seems like it will be enough and quite nice.
+I need a design. so i am working with web for now. maybe then i'll come back to terminal interface.
