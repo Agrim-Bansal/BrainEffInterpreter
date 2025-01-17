@@ -1,0 +1,1 @@
+So I'll be using Blessed module for the terminal interface. seems like it will be enough and quite nice.
