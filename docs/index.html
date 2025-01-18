@@ -42,12 +42,36 @@
                 <div class="code label">Code</div>
                 <textarea id="code" class="code-input" onfocus="(e) => e.target.blur()"></textarea>
 
+                <div class="controls">
+                    <div class="speed-container">
+                        <div class="speed label">Speed</div>
+                        <input id="speed" class="speed-input" type="range" min="1" max="100" value="50"> </input>
+                    </div>
+
+                    <div class="examples">
+                        <div class="example label">Example Programs</div>
+                        <select id="examples" class="example-select">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                </div>
+
                 <div class="input label">Input</div>
                 <input id="input" class="input-input"> </input>
                 
                 <div class="buttons-container">
                     <button id="run" class="run-button">Run</button>
-                    <button id="stop" class="stop-button">Stop</button>
+                    <button id="stop" class="stop-button">Pause/Play</button>
                     <button id="step" class="step-button">Step</button>
                     <button id="reset" class="reset-button">Reset</button>
                 </div>
@@ -73,7 +97,7 @@
                 </div>
 
                 <div class="output-label label">Output</div>
-                <div id="output" class="output" ></div>
+                <div id="output" class="output"></div>
 
             </div>
         </div>
