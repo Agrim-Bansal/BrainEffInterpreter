@@ -4,6 +4,13 @@ let memory_pointer = 0;
 let code_pointer = 0;
 let speed = 100 - document.getElementById('speed').value;
 
+const examples = [
+    '',
+    ',>,<[->+<]>.',
+    ',[->[>],[<]<] >+ [[>]<-[<]>+>]<-.',
+]
+
+
 document.getElementById('run').addEventListener('click', ()=>{
     codeCleanup();
     codeRunning =true;
@@ -13,7 +20,11 @@ document.getElementById('run').addEventListener('click', ()=>{
 });
 
 document.getElementById('stop').addEventListener('click', ()=>{
-    codeRunning = false;
+    if (codeRunning){
+        codeRunning = false;
+    }else{
+        codeRunning = true;
+    }
 });
 
 document.getElementById('step').addEventListener('click', runCode);
@@ -81,7 +92,7 @@ function runCode(){
             memory.innerHTML = parseInt(memory.innerHTML) - 1;
             break;
         case '.':
-            document.getElementById('output').innerHTML += memory.innerHTML;
+            document.getElementById('output').innerHTML +=  " " + memory.innerHTML;
             break;
         case ',':
             memory.innerHTML = inputs.shift();
@@ -116,6 +127,8 @@ function runCode(){
     if (code_pointer >= code.value.length-1){
         codeRunning = false;
         code_pointer = 0;
+        document.getElementById('input').readOnly = false;
+        document.getElementById('code').readOnly = false;
     }else{
         code_pointer++;
     }
@@ -136,4 +149,12 @@ document.getElementById('speed').addEventListener('change', ()=>{
             runCode();
         }
     }, speed*10);
+});
+
+
+document.getElementById('examples').addEventListener('change', (e)=>{
+    const example = e.target.value;
+    document.getElementById('reset').click();
+    console.log(example);
+    document.getElementById('code').value = examples[example];
 });
