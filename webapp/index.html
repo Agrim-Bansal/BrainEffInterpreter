@@ -5,34 +5,76 @@
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
-        <div class="heading">BrainFuck Interpreter</div>
+        <div class="heading">BrainFuck</div>
         <div class="flex">
             <div class="info">
-                <div>
+                <div class="description">
                     Brainfuck is a Turing complete language designed to be extremely minimalistic. It consists of only eight simple commands, a data pointer, and an instruction pointer. It is meant for amusement rather than practical function.
                 </div>
 
                 <div class="legend">
-                    <Table>
-                        <thead>
-                                <th>Command</th>
-                                <th>Description</th>
-                        </thead>
-                        <tbody>
-                            <tr><td>&gt;</td><td>Move memory pointer to 1 unit right</td></tr>
-                            <tr><td>&lt;</td><td>Move memory pointer to 1 unit left</td></tr>
-                            <tr><td>&plus;</td><td>Increase memory at current location by 1</td></tr>
-                            <tr><td>&minus;</td><td>Decrease memory at current location by 1</td></tr>
-                            <tr><td>&period;</td><td>Output the value at current location</td></tr>
-                            <tr><td>&comma;</td><td>Input a value and store at current location</td></tr>
-                            <tr><td>&lsqb;</td><td> Like a while loop which runs while the memory at current location is not 0</td></tr>
-                            <tr><td>&rsqb;</td><td> Closing of the loop. Loop back when value at current location is not 0</td></tr>
-                        </tbody>
-                    </Table>
+                    <div class="command-container">
+                        <div class="head">Command</div>
+                        <div class="command">&gt;</div>
+                        <div class="command">&lt;</div>
+                        <div class="command">+</div>
+                        <div class="command">-</div>
+                        <div class="command">.</div>
+                        <div class="command">,</div>
+                        <div class="command">[</div>
+                        <div class="command">]</div>
+                    </div>
+                    <div class="commandinfo-container">
+                        <div class = "head">Description</div>
+                        <div class="commandinfo">Move the pointer to one position right</div>
+                        <div class="commandinfo">Move the pointer to one position left</div>
+                        <div class="commandinfo">Increment memory by 1 at pointer location.</div>
+                        <div class="commandinfo">Decrement memory by 1 at pointer location.</div>
+                        <div class="commandinfo">Output the data at pointer location.</div>
+                        <div class="commandinfo">Take input and store it at pointer location.</div>
+                        <div class="commandinfo">Like a while loop. run while the data at pointer is not zero</div>
+                        <div class="commandinfo">Jump back to loop start if data at pointer is not zero </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="operational">
+            <div class="operation">
+                <div class="code label">Code</div>
+                <textarea id="code" class="code-input" placeholder="Enter your code here" onfocus="(e) => e.target.blur()"></textarea>
+
+                <div class="input label">Input</div>
+                <input id="input" class="input-input" placeholder="Enter your input here"> </input>
+                
+                <div class="buttons-container">
+                    <button id="run" class="run-button">Run</button>
+                    <button id="stop" class="stop-button">Stop</button>
+                    <button id="step" class="step-button">Step</button>
+                    <button id="reset" class="reset-button">Reset</button>
+                </div>
+
+                <div class="memory label">Memory</div>
+                <div class="memory-container">
+                    <div class="memory-box">0</div>
+                    <div class="memory-box">0</div>
+                    <div class="memory-box">0</div>
+                    <div class="memory-box">0</div>
+                    <div class="memory-box">0</div>
+                    <div class="memory-box">0</div>
+                    <div class="memory-box">0</div>
+                    <div class="memory-box">0</div>
+                    <div class="memory-box">0</div>
+                    <div class="memory-box">0</div>
+                    <div class="memory-box">0</div>
+                    <div class="memory-box">0</div>
+                    <div class="memory-box">0</div>
+                    <div class="memory-box">0</div>
+                    <div class="memory-box">0</div>
+                    <div class="memory-box">0</div>
+                </div>
+
+                <div class="output-label label">Output</div>
+                <div id="output" class="output" > Output goes here</div>
+                
 
             </div>
 

@@ -1,57 +1,186 @@
 :root{
-    background-color: rgb(47, 7, 148);
-    color: black;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: #0A1045;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    height: 100vh;
+    width: 100vw;
 }
 body{
-    margin: 0;
-    padding: 2%;
-    font-size: 20px;
+    font-size: 25px;
+    height: 100%;
+    width: 100%;
 }
 
 .heading{
-    font-size: xx-large;
+    margin-top: 2%;
+    margin-bottom: 4%;
+    font-size: 2.5rem;
     text-align: center;
+    font-weight: 1000;
 }
 
 .flex{
     display: flex;
-    margin:2% auto;
-    padding: 2%;
-
-    /* height: 70%; */
+    margin:1.5% auto;
+    padding: 0 7.5%;
     justify-content: space-between;
 }
 
 .info{
-    width: 40%;
+    width: 30%;
     text-align: justify;
+    background-color: #6369D1;
+    padding: 2%;
+    height: 67vh;
+}
+
+.description{
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+.legend{
+    margin-top: 5%;
+    display: flex;
+    padding: 0%;
+    height: 65%;
+}
+
+.command-container{
+    background-color: #0A1045;
+    padding: 4%;
+    font-size: 1.3rem;
+    height: 100%;
+    text-align: center;
+}
+.commandinfo-container{
+    background-color: #F9E900;
+    color: black;
+    padding: 4%;
+    font-size: 0.75rem;
+    font-weight: 700;
+    height: 100%;
+    text-align: justify;
+}
+.command, .commandinfo{
+    flex-basis: 1/9;
+    height: 11%;
+}
+
+.head{
+    font-size: 1.5rem;
+    font-weight: 700;
+    height: 10%;
+    flex-basis: 1/9;
+    margin: 2% 0 5% 0;
+    text-align: center;
 }
 
 .operation{
-    width: 40%;
+    width: 60%;
+    padding: 2%;
+    background-color: #4D9DE0;
+    height: 67vh;
+    color: black;
 }
-table{
-    margin: 10% 2% 2% 2%;
+.label{
+    font-size: 0.9rem;
+    font-weight: 800;
+}
+textarea{
     width: 100%;
-    font-family: inherit;
+    height: 25%;
+    font-size: 1.1rem;
+    padding: 1%;
+    margin: 0% 0 3% 0;
+    background-color: #6369D1;
+    color: white;
+    resize: none;
+}
+textarea:focus{
+    outline: none;
 }
 
-tbody{
+textarea::placeholder{
+    color: white;
+}
+
+input{
+    width: 100%;
+    height: 10%;
+    padding: 1%;
+    margin: 0% 0 3% 0;
+    background-color: #0A1045;
+    color: white;
+    border: none;
+    font-size: 1.1rem;
+}
+input:focus{
+    outline: none;
+}
+input::placeholder{
+    color: white;
+}
+.buttons-container{
+    display: flex;
+    justify-content: space-evenly;
     width: 100%;
 }
-thead{
-    width: 100%;
+
+button{
+    width: 15%;
+    height: 10%;
+    padding: 1%;
+    margin: 0% 0 3% 0;
+    border-radius: 1vh;
+    background-color: #FF7700;
+    color: white;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
 }
-td, th{
+
+button:hover{
+    filter: brightness(0.9);
+}
+
+button:active{
+    filter: brightness(1.2);
+}
+
+.memory-container{
+    width: 96%;
+    background-color: black;
     padding: 2%;
-    width: fit-content;
-    text-align: justify;
-    font-family: inherit;
+    margin: 0 0 2% 0;
+    display: flex;
+    overflow-x: scroll auto;
 }
-tr:nth-child(2n){
-    background-color: #dcf959;
+
+.memory-box{
+    color:white;
+    font-size: 1.2rem;
+    /* height: 100%; */
+    font-weight: 1000;
+    text-align: center;
+    width: 3%;
+    padding: 1%;
+    border: 2px white solid;
+    flex-basis: 3%;
+    margin : 0 1% 0 0;
 }
-tr:nth-child(2n+1){
-    background-color: #edfa65;
+
+.output{
+    width: 98%;
+    height: 7%;
+    padding: 1%;
+    background-color: #0A1045;
+    color: white;
+    border: none;
+    font-size: 1.1rem;
+    align-content: center;
+}
+
+.active{
+    background-color: #FF7700;
+    color: white;
 }
