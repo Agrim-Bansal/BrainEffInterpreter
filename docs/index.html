@@ -53,9 +53,9 @@
                         <div class="example label">Example Programs</div>
                         <select id="examples" class="example-select" >
                             <option value="0">Select an example</option>
-                            <option value="1">Input and Add Two Numbers</option>
-                            <option value="2">Input n, then input n numbers and find their sum</option>
-                            <option value="3">3</option>
+                            <option value="1">Put 1,2,3,4 in adjacent memory cells</option>
+                            <option value="2">Input and Add Two Numbers</option>
+                            <option value="3">Input n, then input n numbers and find their sum</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
                             <option value="6">6</option>
@@ -103,12 +103,38 @@
             </div>
         </div>
         
-        <!-- <div class="dialog" id="dialog">
-            <div class="">
-
+        <div class="dialog" id="dialog">
+            <div class="heading">
+                BrainFuck
             </div>
-            <button id="close" class="close-button">Close</button>
-        </div> -->
+            <div class="info">
+                <div>
+                    BrainFuck. It basically means to overcomplicate a fairly easy task. This is apt for the language which has been named so. It is an extremely minimalist language with only 8 commands. 
+                    It is Turing complete and can be used to solve any problem that can be solved by a computer or in other words, every single algorithm can be implemented in it but that'll be far from practical
+                    due to the lack of abstraction and well, the minimalism. But that doesn't mean it's not fun to rack our brains, get frustrated and then finally solve a problem in BrainFuck.
+                    <br/>
+                    <br/>
+                    This language is a great way to understand how a computer works at a very low level. It's a great way to understand how memory works, how the stack works, how loops work and how the program counter works.
+                    In this web interface, you'll be able to gain amazing insight into this language and how it works. You can write your own code, see it running, and debug it. 
+                    You can also run some example programs to get a feel of how the language works.
+                    <br/>
+                    <br/>
+                    You'll find a legend for the commands on the page, but I'll recommend reading about them first. Try the <a href="https://github.com/Agrim-Bansal/BrainFuckInterpreter">ReadMe</a> file in the repository for a more detailed explanation of the commands.
+                    Here's how to use the website : <br/>
+                    <ul>
+                        <li>You'll find a brief into on the left side of the page along with the legend</li>
+                        <li>Write your code in the code box. Any characters not allowed, will be treated as comments and removed at run.</li>
+                        <li>Enter in the inputs if required in the input box separated by a space. So, if you want to input a 1 first and then a 2, fill '1 2'. Program will automatically take them.</li>
+                        <li>Click on the Run button to run the code. You can also pause the code by clicking on the Pause/Play button.</li>
+                        <li>Click on the Step button to run the code one step at a time.</li>
+                        <li>Click on the Reset button to reset the memory and the inputs, output.</li>
+                        <li>You can change the speed of the code by using the slider.</li>
+                        <li>You can also use the example programs to see how they work.</li>
+                    </ul>   
+                </div>
+                <button id="close" class="close-button">Close</button>
+            </div>
+        </div>
 
 
 

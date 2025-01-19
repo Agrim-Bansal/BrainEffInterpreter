@@ -6,6 +6,7 @@ let speed = 100 - document.getElementById('speed').value;
 
 const examples = [
     '',
+    '+>++>+++>++++',
     ',>,<[->+<]>.',
     ',[->[>],[<]<] >+ [[>]<-[<]>+>]<-.',
 ]
@@ -86,10 +87,10 @@ function runCode(){
             memory_pointer = (memory_pointer + 16 -1 )%16;
             break;
         case '+':
-            memory.innerHTML = parseInt(memory.innerHTML) + 1;
+            memory.innerHTML = (parseInt(memory.innerHTML) + 1)%256;
             break;
         case '-':
-            memory.innerHTML = parseInt(memory.innerHTML) - 1;
+            memory.innerHTML = (parseInt(memory.innerHTML) - 1)%256;
             break;
         case '.':
             document.getElementById('output').innerHTML +=  " " + memory.innerHTML;
@@ -157,4 +158,13 @@ document.getElementById('examples').addEventListener('change', (e)=>{
     document.getElementById('reset').click();
     console.log(example);
     document.getElementById('code').value = examples[example];
+});
+
+
+document.getElementById('close').addEventListener('click', ()=>{
+    if (document.getElementById('dialog')){
+        const dialog = document.getElementById('dialog');
+        dialog.classList.add('fade-out');
+        setTimeout(()=>document.getElementById('dialog').remove(), 500);
+    }
 });
