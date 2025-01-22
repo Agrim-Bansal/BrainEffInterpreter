@@ -39,6 +39,9 @@ This website is aimed to be a nice intro for people to know this language and ex
       ```
     - Enter your code and run. It'll ask for inputs as and when required. Have a look at the commands and detailed instructions written at the very end of the page.
 
+    ![Terminal Interface](./ss1.png)
+
+
 ## Features
 - Code Cleanup (all characters except the 8 commands are ignored and removed at run)
 - Light weight web interface.
