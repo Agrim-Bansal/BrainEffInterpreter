@@ -28,6 +28,17 @@ This website is aimed to be a nice intro for people to know this language and ex
 
     ![Web Interface](./ss.png)
 
+- Terminal App (Update)
+    - install the blessed library required for the app.
+      ```bash
+      pip install blessed
+      ```
+    - Run the app with python
+      ```bash
+      python terminalApp/app.py
+      ```
+    - Enter your code and run. It'll ask for inputs as and when required. Have a look at the commands and detailed instructions written at the very end of the page.
+
 ## Features
 - Code Cleanup (all characters except the 8 commands are ignored and removed at run)
 - Light weight web interface.
@@ -73,3 +84,23 @@ Thank You for bearing with me and reading this far. I hope you enjoy this unique
 Feel free to send me any feedback. I would love to hear from you.
 Now, go make some programs. Happy Coding! :D
 PS: You can try to implement all the sample codes by yourself as a challenge. It will be fun! 
+
+
+# Update 1
+- The project was supposed to be just a script and a webpage but it has evolved. I was, I can't recall why, inspired to make this into a terminal based project as, well, we all developers just love our terminals. And here it is.
+- The BrainFuck Interpreter that works right in the terminal and not just compiling the programs but it comes with the visual representation of the working of the program making it super easy to debug and well, pretty looking.
+
+## How to use? 
+- The terminal works on the blessed python library which provides the interface for controlling the terminal screen.
+So, we do ```pip install blessed``` to install the library.
+- Next? There is no next. Just go ```python terminalApp/app.py``` and el voila! You have the terminal based BrainFuck Interpreter running right there.
+Note : don't try scrolling. It kinda messes stuff up. It's not a coding problem but stems from the way that the terminal works
+
+## Basic Commands:
+- First things first. `q` to quit. This is not vim. I'll let you quit.
+- Second, when the program boots up, it is in state 0. which is basically idle state with no data.
+- Press `c` to enter code mode. Here, you will type in your code which you want to run. Once finished press enter, program will return to the previous state.
+- Whenever the code asks for input, the program enters input state and stays here until you give in the input and press enter.
+- Finally, press `p` to run the code. It stands for play. It'll run, take inputs, show outputs and finally end.
+- If you want to pause, press `p` and it'll stop right there. Press again to let it continue.
+- If you want to reset the program, press `r` and it'll reset the memory-outputs-inputs to the initial state 0.
