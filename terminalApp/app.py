@@ -1,9 +1,19 @@
 from blessed import Terminal
-from time import sleep
 
 term = Terminal()
+code = ',>,<[->+<]>.'
+code = ''
+userInput = ''
+codePointer = 0
+memory = [0]*10
+memoryPointer = 0
+output = ''
+stateStack = ['State 0']
 
-print
+codeBoxPos = (term.length('Code :  '), term.height//6)
+inputBoxPos = (term.length('Input : '), 2 * term.height//6)
+memoryPos = (0, term.height//2 - 1)
+outputBoxPos = (term.length('Output : '), 4* term.height//6)
 
 box_chars = {
     'tl': '┌',  # top left corner
@@ -11,164 +21,183 @@ box_chars = {
     'bl': '└',  # bottom left corner
     'br': '┘',  # bottom right corner
     'v': '│',   # vertical line
-    'h': '─'    # horizontal line
+    'h': '─',    # horizontal line
+    'pointer' : '▲', 
+    'up-joint' : '┬',
+    'down-joint' : '┴',
+
 }
 
-print(term.clear)
+def render():
+    global term, code, memory, memoryPointer, output, codePointer, userInput
 
-print(term.move, end='')
-term.center(box_chars['tl'] + 'Welcome to the terminal app!' + box_chars['tr'])
-
-
-class Colors:
-    global term
-    FontPrimary = term.black
-    FontSecondary = term.black
-    BackgroundPrimary = term.on_deepskyblue
-    BackgroundSecondary = term.on_deepskyblue4
-
-    RED = term.red
-    GREEN = term.green
-    BLUE = term.blue
-    YELLOW = term.yellow
-    MAGENTA = term.magenta
-    CYAN = term.cyan
-    WHITE = term.white
-    BLACK = term.black
-    ORANGE = term.orange
-    PURPLE = term.purple
-    GRAY = term.gray
-    BRIGHT_RED = term.bright_red
-    BRIGHT_GREEN = term.bright_green
-    BRIGHT_BLUE = term.bright_blue
-    BRIGHT_YELLOW = term.bright_yellow
-    BRIGHT_MAGENTA = term.bright_magenta
-    BRIGHT_CYAN = term.bright_cyan
-    BRIGHT_WHITE = term.bright_white
-    BRIGHT_BLACK = term.bright_black
-    BRIGHT_ORANGE = term.bright_orange
-    BRIGHT_PURPLE = term.bright_purple
-    BRIGHT_GRAY = term.bright_gray
-
-
-
-
-class text_box():
-    def __init__(self, text, x, y, w, h, border={'top':True, 'bottom':True, 'left':True, 'right':True}, color=Colors.FontPrimary, bg=Colors.BackgroundPrimary):
-        self.box_chars = {
-            'tl': '┌',  # top left corner
-            'tr': '┐',  # top right corner
-            'bl': '└',  # bottom left corner
-            'br': '┘',  # bottom right corner
-            'v': '│',   # vertical line
-            'h': '─'    # horizontal line
-        }
-        self.x = x
-        self.y = y
-        self.wt = w-2
-        self.ht = h-2
-        self.truncated_text = self.truncateText(text)
-        self.setBorder(border)
-        self.border = border
-        self.color = color
-        self.bg = bg
-
-    def setBorder(self, borders):
-        self.box_chars = {
-            'tl': '┌' if borders['top'] and borders['left'] else '-' if borders['top'] else '|' if borders['left'] else ' ',
-            'tr': '┐' if borders['top'] and borders['right'] else '-' if borders['top'] else '|' if borders['right'] else ' ',
-            'bl': '└' if borders['bottom'] and borders['left'] else '-' if borders['bottom'] else '|' if borders['left'] else ' ',
-            'br': '┘' if borders['bottom'] and borders['right'] else '-' if borders['bottom'] else '|' if borders['right'] else ' ',
-            'l' : '│' if borders['left'] else ' ',
-            'r' : '│' if borders['right'] else ' ',
-            'v' : '│',
-            'h': '─', 
-        }
-
-
-    def truncateText(self, text):
-        i=0
-        while i < len(text):
-            if text[i] == '\n':
-                text = text[:i] + ' '*(self.wt - i%self.wt) + text[i+1:]
-            i+=1
-        return [text[self.wt*i:min(self.wt*(i+1), len(text))] for i in range(len(text)//self.wt+1)]
-
-
-
-    def addText(self, text):
-        self.truncated_text = [*self.truncated_text[:-1], *self.truncateText(self.truncated_text[-1] + text)]
-
-    def __str__(self):
-        print(self.color + self.bg)
-
-        if self.border['top']:
-            print(term.move_xy(self.x,self.y) + self.box_chars['tl'] + self.box_chars['h']*self.wt + self.box_chars['tr'])
-
-        if len(self.truncated_text) > self.ht:
-            for i in range(self.ht):
-                if len(self.truncated_text[i]) == self.wt:
-                    print(term.move_xy(self.x,self.y+i+1) + self.box_chars['l'] + self.truncated_text[i] + self.box_chars['r'])
-                else :
-                    print(term.move_xy(self.x,self.y+i+1) + self.box_chars['l'] + self.truncated_text[i] + ' '*(self.wt - len(self.truncated_text[i])) + self.box_chars['r'])
-
-            print(term.move_xy(self.x,self.y+self.ht+1) + self.box_chars['l'] + term.orangered + '.'*self.wt + term.normal + self.box_chars['r'])  
-        else:
-            for i in range(len(self.truncated_text)):
-                if len(self.truncated_text[i]) == self.wt:
-                    print(term.move_xy(self.x,self.y+i+1) + self.box_chars['l'] + self.truncated_text[i] + self.box_chars['r'])
-                else :
-                    print(term.move_xy(self.x,self.y+i+1) + self.box_chars['l'] + self.truncated_text[i] + ' '*(self.wt - len(self.truncated_text[i])) + self.box_chars['r'])
-
-            for i in range(len(self.truncated_text), self.ht):
-                print(term.move_xy(self.x,self.y+i+1) + self.box_chars['l'] + ' ' * self.wt + self.box_chars['r'])
-            if self.border['bottom']:
-                print(term.move_xy(self.x,self.y+self.ht+1) + self.box_chars['bl'] + self.box_chars['h']*self.wt + self.box_chars['br'])
-        print(term.normal + term.on_normal)
-
-        return ''
+    print(term.home + term.clear+ term.bold + f'{"BrainFuck": ^{term.width}}')
     
-    def render(self):
-        print(self)
+    print(f'{"-"*11: ^{term.width}}')
+    print(term.move_xy(0, term.height//6) + "Code  :")
+    print(term.move_xy(0, 2*term.height//6) + "Input :")
+    print(term.move_xy(0, 4*term.height//6) + "Output :")
+    print(term.move_xy(term.length("Code  :" + code), term.height//6))
+    print(term.move_xy(term.length("Input: " + userInput), 2* term.height//6))
 
-layout = []
+    print(term.move_xy(*memoryPos) + box_chars['tl'] + box_chars['h']*3 + (box_chars['up-joint'] + box_chars['h']*3)*9 + box_chars['tr'])
+    print(term.move_xy(memoryPos[0], memoryPos[1]+1), *[f"{box_chars['v']}{i:03}" for i in memory], box_chars['v'], sep="")
+    print(term.move_xy(memoryPos[0], memoryPos[1]+2) + box_chars['bl'] + box_chars['h']*3 + (box_chars['down-joint'] + box_chars['h']*3)*9 + box_chars['br'])
+    print(term.move_xy(memoryPos[0]+4*memoryPointer + 2, memoryPos[1]+2) + term.blue +box_chars['pointer'] + term.normal)
 
-layout += [
-    text_box('', 0, 0, term.width//3 + 1, term.height-2),
-    text_box('BrainFuck', int((term.width/3 - term.length('BrainFuck'))/2), 0, term.length('BrainFuck')+3, 3, border={'top':False, 'bottom':False, 'left':False, 'right':False}),
-    text_box('Brainfuck is a Turing complete language designed to be extremely minimalistic.\nIt consists of only eight simple commands, a data pointer, and an instruction pointer.\nIt is meant for amusement rather than practical function', 1, 2, term.width//3-1, 20, {'top':False, 'bottom':False, 'left':False, 'right':False}),
-]
+    print(term.move_xy(*codeBoxPos) + code)
+    if stateStack[-1] != 'code':
+        print(term.move_xy(codeBoxPos[0]+codePointer, codeBoxPos[1]) + term.black_on_khaki + (code[codePointer] if code else '') + term.normal)
+    
+    print(term.move_right(8) + box_chars['h']*len(code))
 
+    print(term.move_xy(*inputBoxPos) + userInput)
+    print(term.move_right(8) + box_chars['h']*len(userInput))
 
-def refresh():
-    global layout
-    print(term.clear)
+    print(term.move_xy(*outputBoxPos) + output)
+    print(term.move_right(9) + box_chars['h']*len(output))
 
-    for e in layout:
-        print(e)
-    # print(te)
+    if stateStack[-1] == 'code':
+        print(term.move_xy(codeBoxPos[0]+term.length(code), codeBoxPos[1]) + term.on_white + ' ' + term.normal)
+    elif stateStack[-1] =='input' :
+        print(term.move_xy(inputBoxPos[0]+term.length(userInput), inputBoxPos[1]) + term.on_white + ' ' + term.normal)
 
-refresh()
-
-while True:
-    with term.cbreak():
-        inp = term.inkey(timeout=0.1)
-    if inp == 'q':
-        print(term.move_xy(term.width//16, term.height) + term.center('Goodbye!'))
-        sleep(1)
-        exit(0)
-    if inp=='r':
-        refresh()
-
-    # else:
-    #     term.clear
-    # print(inp)
-    # if inp == '\n':
-    #     print('Enter pressed')
-    # with open('logs', 'w+') as f:
-    #     f.write(f.read() + inp)
+    print(term.move_xy(0, term.height-5) + term.blue + 'Status : ' + stateStack[-1] + term.normal)
+    print(term.move_xy(0, term.height-3) + term.black_on_white + 'Press p to play/pause, s to enter step mode, c to enter code mode, r to reset, q to quit.' + term.normal)
 
 
+def runCode():
+    global codePointer, memory, memoryPointer, output, code, userInput, stateStack
+
+    codePointer = codePointer
+    command = code[codePointer]
+    if command == '>':
+        memoryPointer = (memoryPointer + 1) % 10
+    elif command == '<':
+        memoryPointer = (memoryPointer + 10 - 1) % 10
+    elif command == '+':
+        memory[memoryPointer] = (memory[memoryPointer] + 1) % 256
+    elif command == '-':
+        memory[memoryPointer] = (memory[memoryPointer] + 256 - 1) % 256
+    elif command == '.':
+        output += ' ' + str(memory[memoryPointer])
+    elif command == ',':
+        if stateStack[-1] == 'input':
+            memory[memoryPointer] = int(userInput.split()[-1]) % 256
+            stateStack.pop()
+        else:
+            stateStack.append('input')
+            return
+    elif command == '[':
+        openCount = 1
+        closeCount = 0
+        if memory[memoryPointer] == 0:
+            while closeCount != openCount:
+                codePointer += 1
+                if code[codePointer] == ']':
+                    closeCount += 1
+                elif code[codePointer] == '[':
+                    openCount += 1
+        else:
+            codePointer += 1
+        codePointer -= 1
+    elif command == ']':
+        openCount = 0
+        closeCount = 1
+        while closeCount != openCount:
+            if memory[memoryPointer] == 0:
+                codePointer+=1
+                return
+            codePointer -= 1
+            if code[codePointer] == ']':
+                closeCount += 1
+            elif code[codePointer] == '[':
+                openCount += 1
+        codePointer -= 1 # TO change the last additive increment
+    else:
+        pass
+    if codePointer == len(code)-1:
+        stateStack = ['State 0']
+        codePointer = 0
+        return
+    if not (codePointer >= len(code)-1) :
+        codePointer += 1
 
 
 
+if __name__ == "__main__":
+
+    render()
+
+    while True:
+        with term.cbreak(), term.hidden_cursor():
+            if stateStack[-1] == 'play':
+                inp = term.inkey(timeout=0.1)
+            else:
+                inp = term.inkey(timeout=None)
+        if inp == 'q':
+            print(term.clear())
+            break
+        elif inp =='r':
+            memory = [0]*10
+            memoryPointer = 0
+            output = ''
+            codePointer = 0
+            userInput = ''
+        elif inp == 'c':
+            if stateStack[-1] != 'code':
+                stateStack.append('code')
+        elif inp.name == 'KEY_ENTER':
+            if stateStack[-1] == 'input':
+                userInput += ' '
+                runCode()
+            if stateStack[-1] == 'code' :
+                stateStack.pop()
+            if stateStack[-1] == 'step':
+                runCode()
+        elif inp == 'p':
+            if stateStack[-1] != 'play':
+                stateStack = ['State 0', 'play']
+            else:
+                stateStack = ['State 0']
+        elif inp == 's':
+            if stateStack[-1] != 'step':
+                stateStack.append('step')
+        elif inp == '':
+            if stateStack[-1] == 'input':
+                if userInput:
+                    userInput = userInput[:-1]
+            if stateStack[-1] == 'code':
+                if code:
+                    codePointer = min(codePointer, len(code)-1)
+                    code = code[:-1]
+        elif inp in '+-<>.,[]' and (stateStack[-1] == 'code'):
+            code += inp
+        elif inp.isnumeric() and stateStack[-1] == 'input':
+            userInput += str(inp)
+        
+        if stateStack[-1] == 'play':
+            runCode()
+            render()
+        if inp:
+            render()
+        
+
+        
+
+        
+        
+
+
+
+'''
+q-quit
+p - play-pause
+r - reset
+s - step
+c - code
+
+and ,.<>[]+- are the brainfuck commands
+
+enter takes in the input / code
+'''
