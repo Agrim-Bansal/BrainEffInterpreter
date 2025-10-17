@@ -20,7 +20,7 @@ This website is aimed to be a nice intro for people to know this language and ex
         python3 pythonApp/interpreter.py
         ```
 - Web Interface
-    - Visit the website [here](https://projects.agrimbansal.com/BrainFuckInterpreter) !
+    - Visit the website [here](https://projects.agrimbansal.com/BrainEffInterpreter) !
     - Write your code in the editor
     - Fill in required inputs separated by space
     - Click on Run and see the code in action
